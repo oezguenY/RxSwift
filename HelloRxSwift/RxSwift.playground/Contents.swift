@@ -40,7 +40,7 @@ Observable.of("A","B","C")
 // You can use this function to create subscriptions as well
 
 Observable<String>.create { observer in
-    
+
     observer.onNext("A")
     observer.onCompleted()
     // never gets called because of onCompleted
@@ -93,3 +93,33 @@ behaviorSubject.onNext("Issue 2")
 behaviorSubject.onNext("Issue 3")
 
 behaviorSubject.onNext("Issue 4")
+
+
+// MARK: - ReplaySubject
+
+// A replaySubject replays events based on the bufferSize that you set
+
+// a replaySubject replays the last x events you put into the buffersize, before subscribing. It also creates all those events created after subscription
+let replaySubject = ReplaySubject<String>.create(bufferSize: 2)
+
+replaySubject.onNext("Issue A")
+replaySubject.onNext("Issue A")
+replaySubject.onNext("Issue B")
+replaySubject.subscribe {
+    print($0)
+}
+
+replaySubject.onNext("Issue A")
+replaySubject.onNext("Issue B")
+replaySubject.onNext("Issue C")
+
+
+// notice, how this rule is individually applicable to every subscription
+
+print("[Subscription 2]")
+replaySubject.subscribe {
+    print($0)
+}
+
+
+
