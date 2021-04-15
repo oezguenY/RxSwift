@@ -1,5 +1,7 @@
 import UIKit
 import RxSwift
+import RxCocoa
+
 
 //let observable = Observable.just(1)
 
@@ -122,4 +124,9 @@ replaySubject.subscribe {
 }
 
 
+
+
+// MARK: - BehaviorRelays
+
+let relay =
 
