@@ -70,3 +70,26 @@ subject.dispose()
 
 subject.onCompleted()
 subject.onNext("Issue 4")
+
+
+// MARK: - BehaviorSubjects
+
+// In order for behaviorSubjects to initialize we have to pass in an initial value
+
+let behaviorSubject = BehaviorSubject(value: "Initial Value")
+
+// as you test this out, you notice that the last value before, and every value after subscription gets printed
+
+behaviorSubject.onNext("Issue 0")
+
+behaviorSubject.subscribe { event in
+    print(event)
+}
+
+behaviorSubject.onNext("Issue 1")
+
+behaviorSubject.onNext("Issue 2")
+
+behaviorSubject.onNext("Issue 3")
+
+behaviorSubject.onNext("Issue 4")
