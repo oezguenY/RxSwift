@@ -128,5 +128,32 @@ replaySubject.subscribe {
 
 // MARK: - BehaviorRelays
 
-let relay =
+let relay = BehaviorRelay(value: "Initial Value")
+
+relay.asObservable()
+    .subscribe {
+        print($0)
+    }
+// you cant change the value of behaviorRelays. Though, you can create new values. Reason being, the value of behaviorRelays are just read only
+
+// Not possible
+//relay.value = "blah"
+//
+// get a new value
+//relay.accept("Hello World")
+
+
+let relay2 = BehaviorRelay(value: ["Item 1"])
+
+var value = relay2.value
+value.append("Item 2")
+value.append("Item 3")
+
+relay2.accept(value)
+
+relay2.asObservable()
+    .subscribe {
+        print($0)
+    }
+
 
